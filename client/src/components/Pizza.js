@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import styled from 'styled-components';
-import {Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
+import {Modal} from 'react-bootstrap';
 
 
 function Pizza({ pizza }) {
@@ -56,18 +56,24 @@ function Pizza({ pizza }) {
                     </button>
                 </div>
             </div>
-            <Modal isOpen={showModal} toggle={toggleModal}>
-                <ModalHeader toggle={toggleModal}>{pizza.name}</ModalHeader>
-                <ModalBody>
-                    <Img className="img-fluid" src={pizza.image} alt={pizza.name}/>
-                    <p>{pizza.description}</p>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-danger" onClick={toggleModal}>
-                        Close
-                    </button>
-                </ModalFooter>
-            </Modal>
+            <div className="p-0 m-0">
+                <Modal show={showModal} onHide={toggleModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{pizza.title}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="w-100 d-flex justify-content-center mb-3">
+                            <Img className="img-fluid" src={pizza.image} alt={pizza.name}/>
+                        </div>
+                        <p>{pizza.description}</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button className="btn btn-danger" onClick={toggleModal}>
+                            Close
+                        </button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </div>
     );
 }
