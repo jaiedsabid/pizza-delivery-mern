@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import PIZZAS from "../static_data/pizza_data";
-import Pizza from "../components/Pizza";
+
+const Pizza = lazy(() => import ("../components/Pizza"));
 
 function Home() {
     return (
@@ -9,7 +10,9 @@ function Home() {
                 { PIZZAS.map(pizza => (
                     <div className="col-md-4 p-3">
                         <div>
-                            <Pizza pizza={pizza} />
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Pizza pizza={pizza} />
+                            </Suspense>
                         </div>
                     </div>
                 ))
