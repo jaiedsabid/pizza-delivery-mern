@@ -1,21 +1,40 @@
-import React, {lazy, Suspense} from 'react';
-import PIZZAS from "../static_data/pizza_data";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {load_All_Pizzas} from "../redux/ActionCreators";
+import Pizza from "../components/Pizza";
 
-const Pizza = lazy(() => import ("../components/Pizza"));
 
 function Home() {
+    const dispatch = useDispatch();
+    const {error, loading, pizzas} = useSelector(state => state.Pizza);
+
+    useEffect(() => {
+        dispatch(load_All_Pizzas());
+    }, [load_All_Pizzas]);
+
     return (
         <div className="container">
             <div className="row">
-                { PIZZAS.map(pizza => (
-                    <div className="col-md-4 p-3">
-                        <div>
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <Pizza pizza={pizza} />
-                            </Suspense>
+                {loading ?
+                    <div className="col-12 p-3">
+                        <div className="spinner-grow text-primary" role="status">
+                            <span className="visually-hidden">Loading...</span>
                         </div>
                     </div>
-                ))
+                    : error ?
+                        <div className="col-12 p-3">
+                            <div className="alert alert-danger">
+                                Something went wrong.
+                            </div>
+                        </div> :
+                        pizzas.map(pizza => (
+                            <div key={pizza._id} className="col-md-4 p-3">
+                                <div>
+                                    <Pizza pizza={pizza}/>
+                                </div>
+                            </div>
+                        ))
+
                 }
             </div>
         </div>

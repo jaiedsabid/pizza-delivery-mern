@@ -3,12 +3,12 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/HomePage";
 
 function App() {
-  return (
-    <div className="App">
-        <Navbar />
-        <Home />
-    </div>
-  );
+    return (
+        <div className="App">
+            <Navbar/>
+            <Home/>
+        </div>
+    );
 }
 
 export default App;

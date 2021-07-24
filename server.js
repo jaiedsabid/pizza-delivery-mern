@@ -7,7 +7,7 @@ const pizza = require("./routes/pizzaRoute");
 app.use(express.json());
 
 // Routes
-app.use("/pizzas", pizza);
+app.use("/api/pizzas", pizza);
 
 app.get("/", (req, res) => {
    res.send("Server is working fine");

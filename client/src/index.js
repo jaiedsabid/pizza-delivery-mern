@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {Provider} from "react-redux";
+import ConfigureStore from "./redux/ConfigureStore";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const store = ConfigureStore();
+
 ReactDOM.render(
-  <React.Fragment>
+  <Provider store={store}>
     <App />
-  </React.Fragment>,
+  </Provider>,
   document.getElementById('root')
 );

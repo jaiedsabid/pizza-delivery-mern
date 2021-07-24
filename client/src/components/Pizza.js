@@ -31,8 +31,8 @@ function Pizza({ pizza }) {
                     <p>Varients</p>
                     <select className="form-select" name="varient" id="varient" ref={inputVarient} onChange={onChangeVarient}>
                         {
-                            pizza.varients.map(varient => (
-                                <option value={varient}>{varient}</option>
+                            pizza.varients.map((varient, indx) => (
+                                <option key={indx} value={varient}>{varient}</option>
                             ))
                         }
                     </select>
@@ -41,7 +41,7 @@ function Pizza({ pizza }) {
                     <p>Quantity</p>
                     <select className="form-select" name="quantity" id="quantity" ref={inputQuantity} onChange={onChangeQuantity}>
                         { [...Array(10).keys()].map((a, i) => (
-                            <option value={i+1}>{i+1}</option>
+                            <option key={i+1} value={i+1}>{i+1}</option>
                         )) }
                     </select>
                 </div>
