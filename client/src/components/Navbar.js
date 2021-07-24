@@ -1,6 +1,8 @@
 import React from 'react';
+import {useSelector} from "react-redux";
 
 function Navbar() {
+    const cartItems = useSelector(state => state.Cart.cartItems.length);
     return (
         <React.Fragment>
             <nav className="navbar navbar-expand-lg navbar-light shadow-lg p-3 mb-5 bg-body rounded">
@@ -17,7 +19,17 @@ function Navbar() {
                                 <a className="nav-link" href="#">Login</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Cart</a>
+                                <a className="nav-link position-relative" href="#">Cart
+                                    {
+                                        cartItems ?
+                                        (
+                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {cartItems}
+                                            <span className="visually-hidden">unread messages</span>
+                                        </span>
+                                        ) : null
+                                    }
+                                </a>
                             </li>
                         </ul>
                     </div>

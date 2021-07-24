@@ -10,7 +10,7 @@ function Home() {
 
     useEffect(() => {
         dispatch(load_All_Pizzas());
-    }, [load_All_Pizzas]);
+    }, [dispatch]);
 
     return (
         <div className="container">

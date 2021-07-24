@@ -1,9 +1,11 @@
 import React, {useRef, useState} from 'react';
 import styled from 'styled-components';
 import {Modal} from 'react-bootstrap';
-
+import {useDispatch} from "react-redux";
+import {addToCart} from "../redux/ActionCreators";
 
 function Pizza({ pizza }) {
+    const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(1);
     const [varient, setVarient] = useState('small');
     const [showModal, setShowModal] = useState(false);
@@ -17,6 +19,10 @@ function Pizza({ pizza }) {
     const onChangeQuantity = () => {
         setQuantity(inputQuantity.current.value);
     };
+
+    const onAddToCart = () => {
+        dispatch(addToCart(pizza, quantity, varient));
+    }
 
     const toggleModal = () => setShowModal(!showModal);
 
@@ -51,7 +57,7 @@ function Pizza({ pizza }) {
                     <Price>Price: {pizza.prices[0][varient] * quantity} BDT</Price>
                 </div>
                 <div className="m-1 w-100">
-                    <button className="btn btn-danger">
+                    <button onClick={onAddToCart} className="btn btn-danger">
                         Add to Cart
                     </button>
                 </div>
