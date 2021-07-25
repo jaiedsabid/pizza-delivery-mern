@@ -1,40 +1,34 @@
 import React from 'react';
 import {useSelector} from "react-redux";
+import {Navbar as NavBar, Nav, Container} from "react-bootstrap";
 
 function Navbar() {
     const cartItems = useSelector(state => state.Cart.cartItems.length);
     return (
         <React.Fragment>
-            <nav className="navbar navbar-expand-lg navbar-light shadow-lg p-3 mb-5 bg-body rounded">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">⚡ Flash Pizza</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Login</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link position-relative" href="#">Cart
-                                    {
-                                        cartItems ?
+            <NavBar collapseOnSelect className="shadow-lg p-3 mb-5 bg-body rounded" expand="lg" variant="light">
+                <Container fluid>
+                    <NavBar.Brand href="#home">⚡ Flash Pizza</NavBar.Brand>
+                    <NavBar.Toggle aria-controls="responsive-navbar-nav" />
+                    <NavBar.Collapse id="responsive-navbar-nav">
+                        <Nav className="ms-auto">
+                            <Nav.Link className="ms-auto" href="#login">Login</Nav.Link>
+                            <Nav.Link className="ms-auto position-relative" href="#cart">Cart
+                                {
+                                    cartItems ?
                                         (
-                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            {cartItems}
-                                            <span className="visually-hidden">unread messages</span>
-                                        </span>
+                                            <span id="cust-badge"
+                                                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {cartItems}
+                                                <span className="visually-hidden">Total Cart Items</span>
+                                                </span>
                                         ) : null
-                                    }
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+                                }
+                            </Nav.Link>
+                        </Nav>
+                    </NavBar.Collapse>
+                </Container>
+            </NavBar>
         </React.Fragment>
     );
 }
