@@ -8,12 +8,12 @@ function Navbar() {
         <React.Fragment>
             <NavBar collapseOnSelect className="shadow-lg p-3 mb-5 bg-body rounded" expand="lg" variant="light">
                 <Container fluid>
-                    <NavBar.Brand href="#home">⚡ Flash Pizza</NavBar.Brand>
+                    <NavBar.Brand href="/">⚡ Flash Pizza</NavBar.Brand>
                     <NavBar.Toggle aria-controls="responsive-navbar-nav" />
                     <NavBar.Collapse id="responsive-navbar-nav">
                         <Nav className="ms-auto">
                             <Nav.Link className="ms-auto" href="#login">Login</Nav.Link>
-                            <Nav.Link className="ms-auto position-relative" href="#cart">Cart
+                            <Nav.Link className="ms-auto position-relative" href="/cart">Cart
                                 {
                                     cartItems ?
                                         (

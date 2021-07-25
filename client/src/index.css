@@ -22,9 +22,3 @@ code {
 .navbar-brand {
   color: black !important;
 }
-
-@media screen and (max-width: 426px) {
-  #cust-badge {
-    top: 3px !important;
-  }
-}

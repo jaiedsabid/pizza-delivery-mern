@@ -44,11 +44,16 @@ export const addToCart = (pizza, quantity, varient) => (dispatch, getState) => {
         price: pizza.prices[0][varient] * quantity
     };
 
-    dispatch({
-        type: ActionTypes.ADD_TO_CART,
-        payload: cartItem
-    })
+    if (quantity > 10) {
+        alert("You can't add more than 10 Pizzas of the same type!");
+    } else {
+        dispatch({
+            type: ActionTypes.ADD_TO_CART,
+            payload: cartItem
+        })
 
-    const cartItems = getState().Cart.cartItems;
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        const cartItems = getState().Cart.cartItems;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+    }
 }
