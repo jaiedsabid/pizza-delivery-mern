@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {useSelector, useDispatch} from "react-redux";
-import {addToCart} from "../redux/ActionCreators";
+import {addToCart, removeFromCart} from "../redux/ActionCreators";
 
 function Cart() {
     const dispatch = useDispatch();
@@ -41,7 +41,11 @@ function Cart() {
                                             <img src={item.image} width={80} height={80} alt="item.name"/>
                                         </div>
                                         <div className="my-auto">
-                                            <i className="fa fa-trash text-danger ms-3" aria-hidden="true"></i>
+                                            <i className="fa fa-trash text-danger ms-3" aria-hidden="true"
+                                               onClick={() => {
+                                                   dispatch(removeFromCart(item._id, item.variant))
+                                               }}
+                                            ></i>
                                         </div>
                                     </div>
                                 </div>

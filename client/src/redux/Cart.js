@@ -24,6 +24,14 @@ export default function Cart(state = initialState, action) {
                     ...state, cartItems: [...state.cartItems, action.payload]
                 }
             }
+        case ActionTypes.REMOVE_FROM_CART:
+            const {_id, variant} = action.payload;
+            const newState = {
+                ...state, cartItems: state.cartItems.filter(item => {
+                    return (!(item._id === _id && item.variant === variant));
+                })
+            }
+            return newState;
         default:
             return state;
     }
