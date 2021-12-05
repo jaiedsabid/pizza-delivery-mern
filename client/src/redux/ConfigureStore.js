@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import Pizza from "./Pizza";
 import Cart from "./Cart";
+import { UserRegister } from "./User";
 
 
 const composeEnhancers = composeWithDevTools({});
@@ -21,7 +22,8 @@ export default function ConfigureStore() {
     const store = createStore(
         combineReducers({
             Pizza: Pizza,
-            Cart: Cart
+            Cart: Cart,
+            UserRegister: UserRegister,
         }),
         initialState,
         composeEnhancers(applyMiddleware(thunk))

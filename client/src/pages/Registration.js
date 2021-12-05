@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { registerUser } from "../redux/ActionCreators";
 
 export default function Registration() {
+  const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -71,6 +74,16 @@ export default function Registration() {
     }
   };
 
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const hasNoError = Object.values(formErrors).every((item) => item === false);
+
+    if (hasNoError) {
+      const { name, email, password } = userInfo;
+      dispatch(registerUser({ name, email, password }));
+    }
+  };
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -124,7 +137,9 @@ export default function Registration() {
               onBlur={validateOnBlur}
             />
             <div className="d-flex justify-content-end mt-3">
-              <button className="btn btn-danger">REGISTER</button>
+              <button onClick={onSubmit} className="btn btn-danger">
+                REGISTER
+              </button>
             </div>
             <div className="mt-3">
               <Link to="/login">Click Here To Login</Link>

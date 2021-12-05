@@ -76,3 +76,36 @@ export const removeFromCart = (pizzaId, variant) => (dispatch, getState) =>{
     const cartItems = getState().Cart.cartItems;
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
+
+export const userRegisterRequest = () => {
+    return {
+        type: ActionTypes.USER_REGISTER_REQUEST,
+    };
+}
+
+export const userRegisterSuccess = () => {
+    return {
+        type: ActionTypes.USER_REGISTER_SUCCESS,
+    };
+}
+
+export const userRegisterFailed = () => {
+    return {
+        type: ActionTypes.USER_REGISTER_FAILED,
+    };
+}
+
+export const registerUser = (user) => async (dispatch) => {
+  try {
+    dispatch(userRegisterRequest());
+
+    const response = await axios.post("/api/users/register");
+    const jsonData = await response.json();
+    const data = await jsonData.data;
+    console.log(data);
+  
+    dispatch(userRegisterSuccess());
+  } catch (error) {
+    dispatch(userRegisterFailed());
+  }
+};

@@ -2,12 +2,14 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 const pizza = require("./routes/pizzaRoute");
+const user = require("./routes/userRoute");
 
 // Middlewares
 app.use(express.json());
 
 // Routes
 app.use("/api/pizzas", pizza);
+app.use("/api/users", user);
 
 app.get("/", (req, res) => {
    res.send("Server is working fine");
