@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { registerUser } from "../redux/ActionCreators";
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import {registerUser} from '../redux/ActionCreators';
 
 export default function Registration() {
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({
-    name: "",
-    email: "",
-    password: "",
-    cpassword: "",
+    name: '',
+    email: '',
+    password: '',
+    cpassword: '',
   });
   const [formErrors, setFormErrors] = useState({
     name: false,
@@ -20,7 +20,7 @@ export default function Registration() {
   });
 
   const onChange = (event) => {
-    const { name, value } = event.target;
+    const {name, value} = event.target;
 
     setUserInfo({
       ...userInfo,
@@ -31,56 +31,58 @@ export default function Registration() {
   };
 
   const updateErrorsStatus = (state, value) => {
-    setFormErrors({ ...formErrors, [state]: value });
+    setFormErrors({...formErrors, [state]: value});
   };
 
   const validateFormFields = (name, value) => {
-    if (name === "name" && value === "") {
-      updateErrorsStatus("name", true);
-    } else if (value !== "" && formErrors.name === true) {
-      updateErrorsStatus("name", false);
+    if (name === 'name' && value === '') {
+      updateErrorsStatus('name', true);
+    } else if (value !== '' && formErrors.name === true) {
+      updateErrorsStatus('name', false);
     }
 
-    if (name === "email" && value === "") {
-      updateErrorsStatus("email", true);
-    } else if (value !== "" && formErrors.email === true) {
-      updateErrorsStatus("email", false);
+    if (name === 'email' && value === '') {
+      updateErrorsStatus('email', true);
+    } else if (value !== '' && formErrors.email === true) {
+      updateErrorsStatus('email', false);
     }
 
-    if (value.length < 4 && name === "password") {
-      updateErrorsStatus("password", true);
+    if (value.length < 4 && name === 'password') {
+      updateErrorsStatus('password', true);
     } else if (value.length >= 4 && formErrors.password === true) {
-      updateErrorsStatus("password", false);
+      updateErrorsStatus('password', false);
     }
 
     if (
       value !== userInfo.password &&
       value.length !== userInfo.password.length &&
-      name === "cpassword"
+      name === 'cpassword'
     ) {
-      updateErrorsStatus("cpassword", true);
+      updateErrorsStatus('cpassword', true);
     } else if (value === userInfo.password && formErrors.cpassword === true) {
-      updateErrorsStatus("cpassword", false);
+      updateErrorsStatus('cpassword', false);
     }
   };
 
   const validateOnBlur = (event) => {
-    const { name, value } = event.target;
+    const {name, value} = event.target;
 
-    if (value === "") {
+    if (value === '') {
       updateErrorsStatus(name, true);
-    } else if (formErrors[name] === true && value !== "") {
+    } else if (formErrors[name] === true && value !== '') {
       updateErrorsStatus(name, false);
     }
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const hasNoError = Object.values(formErrors).every((item) => item === false);
+    const hasNoError = Object.values(formErrors).every(
+        (item) => item === false,
+    );
 
     if (hasNoError) {
-      const { name, email, password } = userInfo;
-      dispatch(registerUser({ name, email, password }));
+      const {name, email, password} = userInfo;
+      dispatch(registerUser({name, email, password}));
     }
   };
 
@@ -95,7 +97,7 @@ export default function Registration() {
               name="name"
               placeholder="Name"
               className={
-                formErrors.name ? "form-control is-invalid" : "form-control"
+                formErrors.name ? 'form-control is-invalid' : 'form-control'
               }
               onChange={onChange}
               required
@@ -106,7 +108,7 @@ export default function Registration() {
               name="email"
               placeholder="Email"
               className={
-                formErrors.email ? "form-control is-invalid" : "form-control"
+                formErrors.email ? 'form-control is-invalid' : 'form-control'
               }
               onChange={onChange}
               required
@@ -117,7 +119,7 @@ export default function Registration() {
               name="password"
               placeholder="Password"
               className={
-                formErrors.password ? "form-control is-invalid" : "form-control"
+                formErrors.password ? 'form-control is-invalid' : 'form-control'
               }
               onChange={onChange}
               required
@@ -128,9 +130,9 @@ export default function Registration() {
               name="cpassword"
               placeholder="Confirm Password"
               className={
-                formErrors.cpassword
-                  ? "form-control is-invalid"
-                  : "form-control"
+                formErrors.cpassword ?
+                  'form-control is-invalid' :
+                  'form-control'
               }
               onChange={onChange}
               required
