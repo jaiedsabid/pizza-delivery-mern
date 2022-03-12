@@ -1,30 +1,30 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import Pizza from './Pizza';
 import Cart from './Cart';
-import {UserRegister} from './User';
+import { UserRegister } from './User';
 
 const composeEnhancers = composeWithDevTools({});
-const cartItems = localStorage.getItem('cartItems') ?
-  JSON.parse(localStorage.getItem('cartItems')) :
-  [];
+const cartItems = localStorage.getItem('cartItems')
+    ? JSON.parse(localStorage.getItem('cartItems'))
+    : [];
 const initialState = {
-  Cart: {
-    cartItems,
-  },
+    Cart: {
+        cartItems,
+    },
 };
 
 export default function ConfigureStore() {
-  const store = createStore(
-      combineReducers({
-        Pizza,
-        Cart,
-        UserRegister,
-      }),
-      initialState,
-      composeEnhancers(applyMiddleware(thunk)),
-  );
+    const store = createStore(
+        combineReducers({
+            Pizza,
+            Cart,
+            UserRegister,
+        }),
+        initialState,
+        composeEnhancers(applyMiddleware(thunk))
+    );
 
-  return store;
+    return store;
 }

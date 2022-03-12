@@ -6,6 +6,7 @@ module.exports = {
   },
   'extends': [
     'airbnb',
+    'airbnb/hooks',
     'plugin:react/recommended',
     'eslint:recommended',
     'prettier',
@@ -26,6 +27,7 @@ module.exports = {
   },
   'plugins': [
     'react',
+    'prettier',
   ],
   'rules': {
     'require-jsdoc': 0,
@@ -38,6 +40,17 @@ module.exports = {
           '.js',
           '.jsx',
         ]
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 100,
+        "tabWidth": 4,
+        "semi": true,
+        "endOfLine": "auto"
       }
     ],
     'import/prefer-default-export': 0,
