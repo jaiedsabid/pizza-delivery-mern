@@ -22,12 +22,12 @@ export default function Registration() {
   const onChange = (event) => {
     const {name, value} = event.target;
 
+    validateFormFields(name, value);
+
     setUserInfo({
       ...userInfo,
       [name]: value,
     });
-
-    validateFormFields(name, value);
   };
 
   const updateErrorsStatus = (state, value) => {
@@ -41,9 +41,16 @@ export default function Registration() {
       updateErrorsStatus('name', false);
     }
 
-    if (name === 'email' && value === '') {
+    if (
+      name === 'email' &&
+      (value === '' ||
+      ! /^[a-z0-9\.]+@[a-z0-9]+[\.][a-z]+$/ig.test(value))
+    ) {
       updateErrorsStatus('email', true);
-    } else if (value !== '' && formErrors.email === true) {
+    } else if (
+      value !== '' && formErrors.email === true &&
+      /^[a-z0-9\.]+@[a-z0-9]+[\.][a-z]+$/ig.test(value)
+    ) {
       updateErrorsStatus('email', false);
     }
 
@@ -69,8 +76,6 @@ export default function Registration() {
 
     if (value === '') {
       updateErrorsStatus(name, true);
-    } else if (formErrors[name] === true && value !== '') {
-      updateErrorsStatus(name, false);
     }
   };
 
