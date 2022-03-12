@@ -31,7 +31,15 @@ module.exports = {
     'require-jsdoc': 0,
     'react/prop-types': 'off',
     'new-cap': 0,
-    'react/jsx-filename-extension': 0,
+    'react/jsx-filename-extension': [
+      1,
+      {
+        'extensions': [
+          '.js',
+          '.jsx',
+        ]
+      }
+    ],
     'import/prefer-default-export': 0,
     'default-param-last': 0,
     'no-underscore-dangle': 0,
