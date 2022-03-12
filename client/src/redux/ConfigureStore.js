@@ -18,9 +18,9 @@ const initialState = {
 export default function ConfigureStore() {
   const store = createStore(
       combineReducers({
-        Pizza: Pizza,
-        Cart: Cart,
-        UserRegister: UserRegister,
+        Pizza,
+        Cart,
+        UserRegister,
       }),
       initialState,
       composeEnhancers(applyMiddleware(thunk)),

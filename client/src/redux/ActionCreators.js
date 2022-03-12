@@ -1,25 +1,19 @@
-import * as ActionTypes from './ActionTypes';
 import axios from 'axios';
+import * as ActionTypes from './ActionTypes';
 
-export const loadPizzasRequest = () => {
-  return {
+export const loadPizzasRequest = () => ({
     type: ActionTypes.LOAD_PIZZAS_REQUEST,
-  };
-};
+  });
 
-export const loadPizzasSuccess = (data) => {
-  return {
+export const loadPizzasSuccess = (data) => ({
     type: ActionTypes.LOAD_PIZZAS_SUCCESS,
     payload: data,
-  };
-};
+  });
 
-export const loadPizzasFailed = (error) => {
-  return {
+export const loadPizzasFailed = (error) => ({
     type: ActionTypes.LOAD_PIZZAS_FAILED,
     payload: error,
-  };
-};
+  });
 
 export const loadAllPizzas = () => async (dispatch) => {
   dispatch(loadPizzasRequest());
@@ -37,8 +31,8 @@ export const addToCart = (pizza, quantity, variant) => (dispatch, getState) => {
     name: pizza.name,
     _id: pizza._id,
     image: pizza.image,
-    variant: variant,
-    quantity: quantity,
+    variant,
+    quantity,
     prices: pizza.prices,
     price: pizza.prices[0][variant] * quantity,
   };
@@ -57,14 +51,14 @@ export const addToCart = (pizza, quantity, variant) => (dispatch, getState) => {
       payload: cartItem,
     });
   }
-  const cartItems = getState().Cart.cartItems;
+  const {cartItems} = getState().Cart;
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
 };
 
 export const removeFromCart = (pizzaId, variant) => (dispatch, getState) => {
   const cartItem = {
     _id: pizzaId,
-    variant: variant,
+    variant,
   };
 
   dispatch({
@@ -72,27 +66,21 @@ export const removeFromCart = (pizzaId, variant) => (dispatch, getState) => {
     payload: cartItem,
   });
 
-  const cartItems = getState().Cart.cartItems;
+  const {cartItems} = getState().Cart;
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
 };
 
-export const userRegisterRequest = () => {
-  return {
+export const userRegisterRequest = () => ({
     type: ActionTypes.USER_REGISTER_REQUEST,
-  };
-};
+  });
 
-export const userRegisterSuccess = () => {
-  return {
+export const userRegisterSuccess = () => ({
     type: ActionTypes.USER_REGISTER_SUCCESS,
-  };
-};
+  });
 
-export const userRegisterFailed = () => {
-  return {
+export const userRegisterFailed = () => ({
     type: ActionTypes.USER_REGISTER_FAILED,
-  };
-};
+  });
 
 export const registerUser = (user) => async (dispatch) => {
   try {

@@ -5,8 +5,7 @@ import {Navbar as NavBar, Nav, Container} from 'react-bootstrap';
 function Navbar() {
   const cartItems = useSelector((state) => state.Cart.cartItems.length);
   return (
-    <React.Fragment>
-      <NavBar
+    <NavBar
         collapseOnSelect
         className="shadow-lg p-3 mb-5 bg-body rounded"
         expand="lg"
@@ -37,7 +36,6 @@ function Navbar() {
           </NavBar.Collapse>
         </Container>
       </NavBar>
-    </React.Fragment>
   );
 }
 

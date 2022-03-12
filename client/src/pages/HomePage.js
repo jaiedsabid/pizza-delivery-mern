@@ -15,26 +15,27 @@ function Home() {
   return (
     <div className="container">
       <div className="row">
-        {loading ?
-                    <div className="col-12 p-3">
-                      <div className="spinner-grow text-primary" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                      </div>
-                    </div> :
-                    error ?
-                        <div className="col-12 p-3">
-                          <div className="alert alert-danger">
-                                Something went wrong.
-                          </div>
-                        </div> :
-                        pizzas.map((pizza) => (
-                          <div key={pizza._id} className="col-md-4 p-3">
-                            <div>
-                              <Pizza pizza={pizza}/>
-                            </div>
-                          </div>
-                        ))
-
+        {loading && !error ? (
+          <div className="col-12 p-3">
+            <div className="spinner-grow text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : !error && (
+          pizzas.map((pizza) => (
+            <div key={pizza._id} className="col-md-4 p-3">
+              <div>
+                <Pizza pizza={pizza} />
+              </div>
+            </div>
+          ))
+        )}
+        {
+          error && (
+          <div className="col-12 p-3">
+            <div className="alert alert-danger">Something went wrong.</div>
+          </div>
+        )
         }
       </div>
     </div>

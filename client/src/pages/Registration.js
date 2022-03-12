@@ -19,17 +19,6 @@ export default function Registration() {
     cpassword: false,
   });
 
-  const onChange = (event) => {
-    const {name, value} = event.target;
-
-    validateFormFields(name, value);
-
-    setUserInfo({
-      ...userInfo,
-      [name]: value,
-    });
-  };
-
   const updateErrorsStatus = (state, value) => {
     setFormErrors({...formErrors, [state]: value});
   };
@@ -91,6 +80,17 @@ export default function Registration() {
     }
   };
 
+  const onChange = (event) => {
+    const {name, value} = event.target;
+
+    validateFormFields(name, value);
+
+    setUserInfo({
+      ...userInfo,
+      [name]: value,
+    });
+  };
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -144,7 +144,7 @@ export default function Registration() {
               onBlur={validateOnBlur}
             />
             <div className="d-flex justify-content-end mt-3">
-              <button onClick={onSubmit} className="btn btn-danger">
+              <button type='button' onClick={onSubmit} className="btn btn-danger">
                 REGISTER
               </button>
             </div>

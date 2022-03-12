@@ -28,7 +28,7 @@ function Pizza({pizza}) {
 
   return (
     <div className="m-3 shadow p-3 mb-5 bg-body rounded">
-      <div onClick={toggleModal}>
+      <div role="dialog" onClick={toggleModal}>
         <H1>{pizza.name}</H1>
         <Img src={pizza.image} alt={pizza.name} className="img-fluid" />
       </div>
@@ -71,7 +71,7 @@ function Pizza({pizza}) {
           <Price>Price: {pizza.prices[0][varient] * quantity} BDT</Price>
         </div>
         <div className="m-1 w-100">
-          <button onClick={onAddToCart} className="btn btn-danger">
+          <button type='button' onClick={onAddToCart} className="btn btn-danger">
             Add to Cart
           </button>
         </div>
@@ -88,7 +88,7 @@ function Pizza({pizza}) {
             <p>{pizza.description}</p>
           </Modal.Body>
           <Modal.Footer>
-            <button className="btn btn-danger" onClick={toggleModal}>
+            <button type='button' className="btn btn-danger" onClick={toggleModal}>
               Close
             </button>
           </Modal.Footer>

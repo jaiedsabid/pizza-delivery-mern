@@ -6,9 +6,7 @@ import {addToCart, removeFromCart} from '../redux/ActionCreators';
 function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.Cart.cartItems);
-  const subTotal = cartItems.reduce((ac, cu) => {
-    return ac + cu.price;
-  }, 0);
+  const subTotal = cartItems.reduce((ac, cu) => ac + cu.price, 0);
 
   return (
     <div className="container">
@@ -36,7 +34,7 @@ function Cart() {
                               addToCart(item, item.quantity + 1, item.variant),
                           )
                         }
-                      ></i>
+                       />
                       <span>{item.quantity}</span>
                       <i
                         className="fa fa-minus text-danger ms-2"
@@ -46,7 +44,7 @@ function Cart() {
                               addToCart(item, item.quantity - 1, item.variant),
                           )
                         }
-                      ></i>
+                       />
                     </div>
                   </div>
                   <div className="d-flex flex-row align-content-center">
@@ -65,7 +63,7 @@ function Cart() {
                         onClick={() => {
                           dispatch(removeFromCart(item._id, item.variant));
                         }}
-                      ></i>
+                       />
                     </div>
                   </div>
                 </div>
