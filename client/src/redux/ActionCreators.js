@@ -98,7 +98,7 @@ export const registerUser = (user) => async (dispatch) => {
   try {
     dispatch(userRegisterRequest());
 
-    const response = await axios.post('/api/users/register');
+    const response = await axios.post('/api/users/register', user);
     const jsonData = await response.json();
     const data = await jsonData.data;
     console.log(data);
