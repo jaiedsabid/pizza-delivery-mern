@@ -61,5 +61,6 @@ module.exports = {
     'no-shadow': 0,
     'no-useless-escape': 0,
     'jsx-a11y/no-noninteractive-element-interactions': 0,
+    'react/jsx-props-no-spreading': 0,
   },
 };

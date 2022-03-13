@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Alert from '../components/alert';
 import { registerUser } from '../redux/ActionCreators';
 
 export default function Registration() {
@@ -17,6 +18,10 @@ export default function Registration() {
         email: false,
         password: false,
         cpassword: false,
+    });
+    const [registrationStatus, setRegistrationStatus] = useState({
+        success: false,
+        message: '',
     });
 
     const updateErrorsStatus = (state, value) => {
@@ -68,13 +73,17 @@ export default function Registration() {
         }
     };
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
         event.preventDefault();
         const hasNoError = Object.values(formErrors).every((item) => item === false);
 
         if (hasNoError) {
             const { name, email, password } = userInfo;
-            dispatch(registerUser({ name, email, password }));
+            const [success, message] = await dispatch(registerUser({ name, email, password }));
+            setRegistrationStatus({
+                success,
+                message,
+            });
         }
     };
 
@@ -94,6 +103,13 @@ export default function Registration() {
             <div className="row justify-content-center">
                 <div className="col-md-5">
                     <H2>Register</H2>
+                    {!!registrationStatus.message && (
+                        <Alert
+                            className="mt-5"
+                            type={registrationStatus.success ? 'success' : 'error'}
+                            message={registrationStatus.message}
+                        />
+                    )}
                     <Form className="mt-5">
                         <input
                             type="text"

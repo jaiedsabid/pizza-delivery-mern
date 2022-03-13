@@ -87,12 +87,15 @@ export const registerUser = (user) => async (dispatch) => {
         dispatch(userRegisterRequest());
 
         const response = await axios.post('/api/users/register', user);
-        const jsonData = await response.json();
-        const data = await jsonData.data;
-        console.log(data);
 
-        dispatch(userRegisterSuccess());
+        if (response.status === 200) {
+            dispatch(userRegisterSuccess());
+            return [true, response.data];
+        }
+
+        return [false, response.data];
     } catch (error) {
         dispatch(userRegisterFailed());
+        return [false, error.message];
     }
 };
