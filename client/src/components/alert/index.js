@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { memo, useState } from 'react';
 import { Alert as AlertBootstrap } from 'react-bootstrap';
 
-function Alert({ message, type, ...props }) {
-    return (
+function Alert({ message, type, autoHideDuration = 2000, ...props }) {
+    const [show, setShow] = useState(!!message);
+
+    setTimeout(() => {
+        setShow(false);
+    }, autoHideDuration);
+
+    return show ? (
         <AlertBootstrap variant={type} {...props}>
             {message}
         </AlertBootstrap>
-    );
+    ) : null;
 }
 
-export default Alert;
+export default memo(Alert);

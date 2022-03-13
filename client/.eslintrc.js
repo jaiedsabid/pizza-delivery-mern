@@ -62,5 +62,7 @@ module.exports = {
     'no-useless-escape': 0,
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'react/jsx-props-no-spreading': 0,
+    'no-extra-boolean-cast': 0,
+    'react-hooks/exhaustive-deps': 0,
   },
 };
