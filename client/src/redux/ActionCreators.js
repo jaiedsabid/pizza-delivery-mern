@@ -96,6 +96,6 @@ export const registerUser = (user) => async (dispatch) => {
         return [false, response.data];
     } catch (error) {
         dispatch(userRegisterFailed());
-        return [false, error.message];
+        return [false, error.response.data.message];
     }
 };

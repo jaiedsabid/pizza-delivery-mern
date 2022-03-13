@@ -106,7 +106,7 @@ export default function Registration() {
                     {!!registrationStatus.message && (
                         <Alert
                             className="mt-5"
-                            type={registrationStatus.success ? 'success' : 'error'}
+                            type={registrationStatus.success ? 'success' : 'danger'}
                             message={registrationStatus.message}
                         />
                     )}
