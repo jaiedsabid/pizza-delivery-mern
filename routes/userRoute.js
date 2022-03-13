@@ -9,16 +9,16 @@ router.post('/register', async (req, res) => {
 
     const userExists = await User.exists({ email });
     if (userExists) {
-      res.status(400).json({
+      return res.status(400).json({
         message: 'User already exists with this email',
       });
     }
 
     const newUser = new User({ name, email, password });
     await newUser.save();
-    res.send('User registratred successfully.');
+    return res.send('User registratred successfully.');
   } catch (error) {
-    res
+    return res
       .status(400)
       .json({ message: 'User registration failed!', error });
   }

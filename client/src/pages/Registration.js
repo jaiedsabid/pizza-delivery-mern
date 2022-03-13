@@ -77,8 +77,8 @@ export default function Registration() {
         event.preventDefault();
         const hasNoError = Object.values(formErrors).every((item) => item === false);
 
-        if (hasNoError) {
-            const { name, email, password } = userInfo;
+        const { name, email, password } = userInfo;
+        if (hasNoError && name !== '' && email !== '' && password !== '') {
             const [success, message] = await dispatch(registerUser({ name, email, password }));
             setRegistrationStatus({
                 success,
