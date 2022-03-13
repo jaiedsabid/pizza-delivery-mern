@@ -99,3 +99,33 @@ export const registerUser = (user) => async (dispatch) => {
         return [false, error.response.data.message];
     }
 };
+
+export const userLoginRequest = () => ({
+    type: ActionTypes.USER_LOGIN_REQUEST,
+});
+
+export const userLoginSuccess = () => ({
+    type: ActionTypes.USER_LOGIN_SUCCESS,
+});
+
+export const userLoginFailed = () => ({
+    type: ActionTypes.USER_LOGIN_FAILED,
+});
+
+export const loginUser = (user) => async (dispatch) => {
+    try {
+        dispatch(userLoginRequest());
+
+        const response = await axios.post('/api/users/Login', user);
+
+        if (response.status === 200) {
+            dispatch(userLoginSuccess());
+            return [true, response.data];
+        }
+
+        return [false, response.data];
+    } catch (error) {
+        dispatch(userLoginFailed());
+        return [false, error.response.data.message];
+    }
+};
