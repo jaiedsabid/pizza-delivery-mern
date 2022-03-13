@@ -168,7 +168,7 @@ export default function Registration() {
     );
 }
 
-const Form = styled.div`
+export const Form = styled.div`
     & input:not(:first-of-type) {
         margin-top: 1rem;
     }
@@ -184,6 +184,6 @@ const Form = styled.div`
     }
 `;
 
-const H2 = styled.h2`
+export const H2 = styled.h2`
     font-size: 35px;
 `;
