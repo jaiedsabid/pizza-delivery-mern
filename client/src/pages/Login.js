@@ -144,8 +144,10 @@ export default function Login() {
                                 Login
                             </button>
                         </div>
+                        <Link Link to="/registration">
+                            Registration
+                        </Link>
                     </Form>
-                    <Link to="/registration">Registration</Link>
                 </div>
             </div>
         </div>
