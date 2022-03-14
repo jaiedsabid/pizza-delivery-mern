@@ -78,8 +78,9 @@ export const userRegisterSuccess = () => ({
     type: ActionTypes.USER_REGISTER_SUCCESS,
 });
 
-export const userRegisterFailed = () => ({
+export const userRegisterFailed = (payload) => ({
     type: ActionTypes.USER_REGISTER_FAILED,
+    payload,
 });
 
 export const registerUser = (user) => async (dispatch) => {
@@ -90,13 +91,9 @@ export const registerUser = (user) => async (dispatch) => {
 
         if (response.status === 200) {
             dispatch(userRegisterSuccess());
-            return [true, response.data];
         }
-
-        return [false, response.data];
     } catch (error) {
-        dispatch(userRegisterFailed());
-        return [false, error.response.data.message];
+        dispatch(userRegisterFailed(error.response.data.message));
     }
 };
 
@@ -108,8 +105,9 @@ export const userLoginSuccess = () => ({
     type: ActionTypes.USER_LOGIN_SUCCESS,
 });
 
-export const userLoginFailed = () => ({
+export const userLoginFailed = (payload) => ({
     type: ActionTypes.USER_LOGIN_FAILED,
+    payload,
 });
 
 export const loginUser = (user) => async (dispatch) => {
@@ -120,12 +118,8 @@ export const loginUser = (user) => async (dispatch) => {
 
         if (response.status === 200) {
             dispatch(userLoginSuccess());
-            return [true, response.data];
         }
-
-        return [false, response.data];
     } catch (error) {
-        dispatch(userLoginFailed());
-        return [false, error.response.data.message];
+        dispatch(userLoginFailed(error.response.data.message));
     }
 };

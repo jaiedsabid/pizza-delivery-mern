@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import { Alert as AlertBootstrap } from 'react-bootstrap';
 
-function Alert({ message, type, autoHideDuration = 2000, ...props }) {
+function Alert({ message, type, autoHideDuration = 3000, ...props }) {
     const [show, setShow] = useState(!!message);
 
     setTimeout(() => {

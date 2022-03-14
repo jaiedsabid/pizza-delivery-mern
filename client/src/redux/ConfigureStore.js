@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import Pizza from './Pizza';
+import thunk from 'redux-thunk';
 import Cart from './Cart';
+import Pizza from './Pizza';
 import { UserRegister } from './User';
 
 const composeEnhancers = composeWithDevTools({});

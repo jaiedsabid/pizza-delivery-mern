@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Alert from '../components/alert';
 import { registerUser } from '../redux/ActionCreators';
 
 export default function Registration() {
+    const { loading, success, error } = useSelector((state) => state.UserRegister);
     const dispatch = useDispatch();
     const [userInfo, setUserInfo] = useState({
         name: '',
@@ -18,10 +20,6 @@ export default function Registration() {
         email: false,
         password: false,
         cpassword: false,
-    });
-    const [registrationStatus, setRegistrationStatus] = useState({
-        success: false,
-        message: '',
     });
 
     const updateErrorsStatus = (state, value) => {
@@ -75,15 +73,14 @@ export default function Registration() {
 
     const onSubmit = async (event) => {
         event.preventDefault();
+        if (loading) {
+            return;
+        }
         const hasNoError = Object.values(formErrors).every((item) => item === false);
 
         const { name, email, password } = userInfo;
         if (hasNoError && name !== '' && email !== '' && password !== '') {
-            const [success, message] = await dispatch(registerUser({ name, email, password }));
-            setRegistrationStatus({
-                success,
-                message,
-            });
+            await dispatch(registerUser({ name, email, password }));
         }
     };
 
@@ -103,12 +100,11 @@ export default function Registration() {
             <div className="row justify-content-center">
                 <div className="col-md-5">
                     <H2>Register</H2>
-                    {!!registrationStatus.message && (
-                        <Alert
-                            className="mt-5"
-                            type={registrationStatus.success ? 'success' : 'danger'}
-                            message={registrationStatus.message}
-                        />
+                    {!loading && success && (
+                        <Alert className="mt-5" type="success" message="Registration Successful" />
+                    )}
+                    {!loading && !!error && !success && (
+                        <Alert className="mt-5" type="danger" message={error} />
                     )}
                     <Form className="mt-5">
                         <input
@@ -155,7 +151,20 @@ export default function Registration() {
                         />
                         <div className="d-flex justify-content-end mt-3">
                             <button type="button" onClick={onSubmit} className="btn btn-danger">
-                                REGISTER
+                                {loading ? (
+                                    <>
+                                        <Spinner
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        Loading...
+                                    </>
+                                ) : (
+                                    'REGISTER'
+                                )}
                             </button>
                         </div>
                         <div className="mt-3">
