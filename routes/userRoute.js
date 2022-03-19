@@ -42,7 +42,15 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    return res.send('User logged in successfully.');
+    const currentUser = {
+      // eslint-disable-next-line no-underscore-dangle
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    };
+
+    return res.send({currentUser, message: 'Login successful'});
   } catch (error) {
     return res
       .status(400)

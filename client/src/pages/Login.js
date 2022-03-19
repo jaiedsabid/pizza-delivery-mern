@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Alert from '../components/alert';
 import { loginUser } from '../redux/ActionCreators';
 import { Form, H2 } from './Registration';
 
 export default function Login() {
+    const { loading, success, error, currentUser } = useSelector((state) => state.UserLogin);
     const [login, setLogin] = useState({
         email: {
             value: '',
@@ -16,12 +17,6 @@ export default function Login() {
             error: null,
         },
     });
-    const [alert, setAlert] = useState({
-        message: '',
-        success: false,
-        error: false,
-    });
-    const [isProcessing, setIsProcessing] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -61,35 +56,13 @@ export default function Login() {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        setIsProcessing(true);
 
         const { email, password } = login;
         const isValid = !email.error && !password.error;
 
         if (isValid) {
-            const [status, message] = await dispatch(
-                loginUser({ email: email.value, password: password.value })
-            );
-
-            if (status) {
-                setAlert({
-                    message,
-                    success: true,
-                    error: false,
-                });
-                setTimeout(() => {
-                    history.push('/');
-                }, 2500);
-            } else {
-                setAlert({
-                    message,
-                    success: false,
-                    error: true,
-                });
-            }
+            await dispatch(loginUser({ email: email.value, password: password.value }));
         }
-
-        setIsProcessing(false);
     };
 
     const disableSubmit = () => {
@@ -97,17 +70,28 @@ export default function Login() {
         return !!email.error || !!password.error || email.value === '' || password.value === '';
     };
 
+    useEffect(() => {
+        if (success && Object.keys(currentUser).length > 0) {
+            setTimeout(() => {
+                history.push('/');
+            }, 2500);
+        }
+    }, [success, currentUser, history]);
+
     return (
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-5">
                     <H2>Login</H2>
-                    {!!alert.message && !isProcessing && (
+                    {!loading && success && Object.keys(currentUser).length && (
                         <Alert
                             className="mt-5"
-                            message={alert.message}
-                            type={alert.success ? 'success' : 'danger'}
+                            message={`Welcome back, ${currentUser.name}!`}
+                            type="success"
                         />
+                    )}
+                    {!loading && !!error && (
+                        <Alert className="mt-5" message={error?.message} type="danger" />
                     )}
                     <Form className="mt-5">
                         <input
@@ -144,9 +128,7 @@ export default function Login() {
                                 Login
                             </button>
                         </div>
-                        <Link Link to="/registration">
-                            Registration
-                        </Link>
+                        <Link to="/registration">Registration</Link>
                     </Form>
                 </div>
             </div>

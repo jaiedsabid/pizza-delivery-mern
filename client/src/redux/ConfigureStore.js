@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import Cart from './Cart';
 import Pizza from './Pizza';
-import { UserRegister } from './User';
+import { UserLogin, UserRegister } from './User';
 
 const composeEnhancers = composeWithDevTools({});
 const cartItems = localStorage.getItem('cartItems')
@@ -21,6 +21,7 @@ export default function ConfigureStore() {
             Pizza,
             Cart,
             UserRegister,
+            UserLogin,
         }),
         initialState,
         composeEnhancers(applyMiddleware(thunk))

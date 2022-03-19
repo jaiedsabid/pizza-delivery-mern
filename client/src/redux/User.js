@@ -1,18 +1,38 @@
 import * as ActionTypes from './ActionTypes';
 
-const initialState = {
+const initialRegister = {
     loading: false,
     success: false,
     error: '',
 };
 
-export const UserRegister = (state = initialState, { type, payload }) => {
+const initialLogin = {
+    loading: false,
+    success: false,
+    error: '',
+    currentUser: {},
+};
+
+export const UserRegister = (state = initialRegister, { type, payload }) => {
     switch (type) {
         case ActionTypes.USER_REGISTER_REQUEST:
             return { ...state, loading: true };
         case ActionTypes.USER_REGISTER_SUCCESS:
             return { ...state, loading: false, success: true };
         case ActionTypes.USER_REGISTER_FAILED:
+            return { ...state, loading: false, success: false, error: payload };
+        default:
+            return state;
+    }
+};
+
+export const UserLogin = (state = initialLogin, { type, payload }) => {
+    switch (type) {
+        case ActionTypes.USER_LOGIN_REQUEST:
+            return { ...state, loading: true };
+        case ActionTypes.USER_LOGIN_SUCCESS:
+            return { ...state, loading: false, success: true, currentUser: payload };
+        case ActionTypes.USER_LOGIN_FAILED:
             return { ...state, loading: false, success: false, error: payload };
         default:
             return state;

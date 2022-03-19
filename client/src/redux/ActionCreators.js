@@ -101,8 +101,9 @@ export const userLoginRequest = () => ({
     type: ActionTypes.USER_LOGIN_REQUEST,
 });
 
-export const userLoginSuccess = () => ({
+export const userLoginSuccess = (payload) => ({
     type: ActionTypes.USER_LOGIN_SUCCESS,
+    payload,
 });
 
 export const userLoginFailed = (payload) => ({
@@ -117,7 +118,7 @@ export const loginUser = (user) => async (dispatch) => {
         const response = await axios.post('/api/users/Login', user);
 
         if (response.status === 200) {
-            dispatch(userLoginSuccess());
+            dispatch(userLoginSuccess(response.data.currentUser));
         }
     } catch (error) {
         dispatch(userLoginFailed(error.response.data.message));
