@@ -57,6 +57,10 @@ export default function Login() {
     const onSubmit = async (event) => {
         event.preventDefault();
 
+        if (loading) {
+            return;
+        }
+
         const { email, password } = login;
         const isValid = !email.error && !password.error;
 
@@ -91,7 +95,7 @@ export default function Login() {
                         />
                     )}
                     {!loading && !!error && (
-                        <Alert className="mt-5" message={error?.message} type="danger" />
+                        <Alert className="mt-5" message={error} type="danger" />
                     )}
                     <Form className="mt-5">
                         <input
