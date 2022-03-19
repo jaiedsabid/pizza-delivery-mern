@@ -1,6 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 import { addToCart, removeFromCart } from '../redux/ActionCreators';
 
 function Cart() {
@@ -28,6 +28,7 @@ function Cart() {
                                         <div className="text-start mt-1">
                                             <H2 className="d-inline-block me-3">Quantity: </H2>
                                             <i
+                                                id="increase-cart-item-quantity-btn"
                                                 className="fa fa-plus text-success me-2"
                                                 aria-hidden="true"
                                                 onClick={() =>
@@ -42,6 +43,7 @@ function Cart() {
                                             />
                                             <span>{item.quantity}</span>
                                             <i
+                                                id="decrease-cart-item-quantity-btn"
                                                 className="fa fa-minus text-danger ms-2"
                                                 aria-hidden="true"
                                                 onClick={() =>
@@ -67,6 +69,7 @@ function Cart() {
                                         </div>
                                         <div className="my-auto">
                                             <i
+                                                id="remove-cart-item-btn"
                                                 className="fa fa-trash text-danger ms-3"
                                                 aria-hidden="true"
                                                 onClick={() => {
