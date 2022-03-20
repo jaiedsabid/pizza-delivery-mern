@@ -13,7 +13,7 @@ const initialLogin = {
     currentUser: {},
 };
 
-export const UserRegister = (state = initialRegister, { type, payload }) => {
+export const userRegister = (state = initialRegister, { type, payload }) => {
     switch (type) {
         case ActionTypes.USER_REGISTER_REQUEST:
             return { ...state, loading: true };
@@ -26,7 +26,7 @@ export const UserRegister = (state = initialRegister, { type, payload }) => {
     }
 };
 
-export const UserLogin = (state = initialLogin, { type, payload }) => {
+export const userLogin = (state = initialLogin, { type, payload }) => {
     switch (type) {
         case ActionTypes.USER_LOGIN_REQUEST:
             return { ...state, loading: true };
@@ -34,6 +34,8 @@ export const UserLogin = (state = initialLogin, { type, payload }) => {
             return { ...state, loading: false, success: true, currentUser: payload };
         case ActionTypes.USER_LOGIN_FAILED:
             return { ...state, loading: false, success: false, error: payload };
+        case ActionTypes.USER_LOGOUT:
+            return { ...state, loading: false, success: false, currentUser: null };
         default:
             return state;
     }

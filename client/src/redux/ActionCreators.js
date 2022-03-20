@@ -111,6 +111,10 @@ export const userLoginFailed = (payload) => ({
     payload,
 });
 
+export const userLogout = () => ({
+    type: ActionTypes.USER_LOGOUT,
+});
+
 export const loginUser = (user) => async (dispatch) => {
     try {
         dispatch(userLoginRequest());

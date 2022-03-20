@@ -24,13 +24,7 @@ function Navbar() {
                 <NavBar.Toggle aria-controls="responsive-navbar-nav" />
                 <NavBar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto">
-                        {!Object.keys(currentUser).length ? (
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/login">
-                                    Login
-                                </Link>
-                            </li>
-                        ) : (
+                        {!!currentUser && Object.keys(currentUser).length ? (
                             <li className="nav-item dropdown">
                                 <div
                                     className="nav-link dropdown-toggle text-end"
@@ -39,7 +33,7 @@ function Navbar() {
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
-                                    {currentUser.name}
+                                    {currentUser?.name}
                                 </div>
                                 <ul
                                     className="dropdown-menu"
@@ -56,6 +50,12 @@ function Navbar() {
                                         </Link>
                                     </li>
                                 </ul>
+                            </li>
+                        ) : (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/login">
+                                    Login
+                                </Link>
                             </li>
                         )}
                         <Link className="nav-link ms-auto position-relative" to="/cart">
