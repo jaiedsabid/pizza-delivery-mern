@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Alert from '../components/alert';
@@ -131,7 +132,20 @@ export default function Login() {
                                 onClick={onSubmit}
                                 disabled={disableSubmit()}
                             >
-                                Login
+                                {loading ? (
+                                    <>
+                                        <Spinner
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        Loading...
+                                    </>
+                                ) : (
+                                    'LOGIN'
+                                )}
                             </button>
                         </div>
                         <Link to="/registration">Registration</Link>
