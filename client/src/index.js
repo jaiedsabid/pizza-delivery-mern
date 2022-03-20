@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { Provider } from 'react-redux';
-import App from './App';
-import ConfigureStore from './redux/ConfigureStore';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './App';
+import './index.css';
+import ConfigureStore from './redux/ConfigureStore';
 
 const store = ConfigureStore();
 

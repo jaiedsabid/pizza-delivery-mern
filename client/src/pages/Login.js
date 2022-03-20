@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Alert from '../components/alert';
 import { loginUser } from '../redux/ActionCreators';
+import { setTolocalStorage } from '../utils/helpers';
 import { Form, H2 } from './Registration';
 
 export default function Login() {
@@ -79,6 +80,7 @@ export default function Login() {
             setTimeout(() => {
                 history.push('/');
             }, 2500);
+            setTolocalStorage('currentUser', currentUser);
         }
     }, [success, currentUser, history]);
 
