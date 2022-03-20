@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
+import NotFound404 from './pages/404';
 import Cart from './pages/Cart';
 import Home from './pages/HomePage';
 import Login from './pages/Login';
@@ -17,6 +18,7 @@ function App() {
                     <Route exact path="/cart" component={Cart} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/registration" component={Registration} />
+                    <Route path="*" component={NotFound404} />
                 </Switch>
             </Router>
         </div>
