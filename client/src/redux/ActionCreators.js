@@ -37,10 +37,9 @@ export const addToCart = (pizza, quantity, variant) => (dispatch, getState) => {
         price: pizza.prices[0][variant] * quantity,
     };
 
-    if (quantity > 10) {
+    if (parseInt(quantity) > 10) {
         alert("You can't add more than 10 Pizzas of the same type!");
-    } else if (quantity <= 0) {
-        // alert("You can't decrease quantity less than 1!");
+    } else if (parseInt(quantity) <= 0) {
         dispatch({
             type: ActionTypes.REMOVE_FROM_CART,
             payload: cartItem,

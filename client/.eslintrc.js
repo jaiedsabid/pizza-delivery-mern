@@ -64,5 +64,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'no-extra-boolean-cast': 0,
     'react-hooks/exhaustive-deps': 0,
+    'radix': 0
   },
 };

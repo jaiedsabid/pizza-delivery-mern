@@ -35,7 +35,7 @@ function Cart() {
                                                     dispatch(
                                                         addToCart(
                                                             item,
-                                                            item.quantity + 1,
+                                                            parseInt(item.quantity) + 1,
                                                             item.variant
                                                         )
                                                     )
