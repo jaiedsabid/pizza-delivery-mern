@@ -21,7 +21,7 @@ function Checkout({ amount, ...props }) {
                 token={tokenHandler}
                 stripeKey="pk_test_51Ig33UFhm6X1t5EfmR99yz6T9RurCLdm7Cydgzi4sElzdKUKinUmZYOLYOo4QsWFblXQ4Z7lcfKOjJNASKbpCOn200rhdQ69Ck"
             >
-                <button type="button" className="btn btn-danger">
+                <button id="checkout-btn" type="button" className="btn btn-danger">
                     {loading ? (
                         <Spinner animation="border" variant="light" role="status">
                             <span className="visually-hidden">Loading...</span>
