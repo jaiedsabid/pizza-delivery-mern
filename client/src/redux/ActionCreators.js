@@ -127,3 +127,32 @@ export const loginUser = (user) => async (dispatch) => {
         dispatch(userLoginFailed(error.response.data.message));
     }
 };
+
+export const placeOrder = (token, subTotal) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ActionTypes.PLACE_ORDER_REQUEST,
+        });
+
+        const { cartItems } = getState().Cart;
+        const { currentUser } = getState().UserLogin;
+
+        const response = await axios.post('/api/orders/makeorder', {
+            cartItems,
+            subTotal,
+            currentUser,
+            token,
+        });
+
+        if (response.status === 200) {
+            dispatch({
+                type: ActionTypes.PLACE_ORDER_SUCCESS,
+            });
+        }
+    } catch (error) {
+        dispatch({
+            type: ActionTypes.PLACE_ORDER_FAILED,
+            payload: error.response.data.message,
+        });
+    }
+};

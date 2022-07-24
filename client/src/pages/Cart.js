@@ -1,15 +1,29 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Alert from '../components/alert';
+import Checkout from '../components/Checkout';
 import { addToCart, removeFromCart } from '../redux/ActionCreators';
 
 function Cart() {
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.Cart.cartItems);
+    const { success, error } = useSelector((state) => state.OrderStatus);
     const subTotal = cartItems.reduce((ac, cu) => ac + cu.price, 0);
 
     return (
         <div className="container">
+            {(success || error) && (
+                <div className="row">
+                    <div className="col">
+                        <Alert
+                            type={success ? 'success' : 'danger'}
+                            message={success ? 'Order Placed Successfully!' : error}
+                            autoHideDuration={3000}
+                        />
+                    </div>
+                </div>
+            )}
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <H1>Cart Items</H1>
@@ -92,6 +106,7 @@ function Cart() {
                     <H1>Total Price</H1>
                     <div>
                         <TotalPrice>{subTotal}</TotalPrice>
+                        {cartItems.length > 0 && <Checkout className="mt-5" amount={subTotal} />}
                     </div>
                 </div>
             </div>
