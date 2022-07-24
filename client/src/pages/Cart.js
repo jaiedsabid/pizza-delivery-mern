@@ -106,7 +106,7 @@ function Cart() {
                     <H1>Total Price</H1>
                     <div>
                         <TotalPrice>{subTotal}</TotalPrice>
-                        { cartItems.length > 0 && (<Checkout className="mt-5" amount={subTotal} />)}
+                        {cartItems.length > 0 && <Checkout className="mt-5" amount={subTotal} />}
                     </div>
                 </div>
             </div>
